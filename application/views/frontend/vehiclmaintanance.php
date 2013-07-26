@@ -101,7 +101,7 @@
                                     <a href="#"><i class="icon-home"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#">Vehicle Master</a>
+                                    <a href="#">Vehicle Insurance</a>
                                 </li>
                                 <!--<li>
                                     <a href="#">About Us</a>
@@ -120,8 +120,8 @@
                     </nav>
      <?php
         	
-			$attributes = array('name' => 'vehicle', 'id' => 'vehicle');	   
-	  		echo form_open('vehicle/addVehicle' , $attributes);
+			$attributes = array('name' => 'insurance', 'id' => 'insurance');	   
+	  		echo form_open('insurance/addinsurance' , $attributes);
 			
 
        ?>
@@ -132,10 +132,10 @@
 								<tbody>
 									<tr style="border:none; background-color:#FFF;">
 										
-										<td><div class="row-fluid"><label>Vehicle No<span class="f_req">*</span></label>
+										<td><div class="row-fluid"><label>Vehicle Id<span class="f_req">*</span></label>
                                            <?php $atts = array(
-													  'name' => 'vehicle_no',
-													  'id'   => 'vehicle_no',
+													  'name' => 'vehicle_id',
+													  'id'   => 'vehicle_id',
 													  'size' => 50
 													  
 													  
@@ -143,21 +143,21 @@
                                              <?php echo form_input($atts); ?>
                                             
                                        </div></td>
-										<td><div class="row-fluid"><label>Vehicle Type<span class="f_req">*</span></label>
+										<td><div class="row-fluid"><label>Engine Oil Change Date<span class="f_req">*</span></label>
                                         <?php $atts = array(
-													  'name' => 'vehicle_type',
-													  'id'   => 'vehicle_type',
+													  'name' => 'engine_oil_change_date',
+													  'id'   => 'engine_oil_change_date',
 													  'size' => 50
 													  
 													  
 										   ); ?>
                                              <?php echo form_input($atts); ?>
                                         </div></td>
-                                        <td><div class="row-fluid"><label>Make Year<span class="f_req"></span></label>
+                                        <td><div class="row-fluid"><label>Tyres Change Date<span class="f_req"></span></label>
                                        <?php $atts = array(
 													
-													  'name' => 'make_year',
-													  'id'   => 'make_year',
+													  'name' => 'tyres_change_date',
+													  'id'   => 'tyres_change_date',
 													  'size' => 35
 													
 										   ); ?>
@@ -167,10 +167,10 @@
 
 						<tr style="border:none; background-color:#FFF;">
 										
-										<td><div class="row-fluid"><label>Color<span class="f_req">*</span></label>
+										<td><div class="row-fluid"><label>Gear Box Change Date<span class="f_req">*</span></label>
                                            <?php $atts = array(
-													  'name' => 'color',
-													  'id'   => 'color',
+													  'name' => 'gear_box_change_date',
+													  'id'   => 'gear_box_change_date',
 													  'size' => 50
 													  
 													  
@@ -178,19 +178,19 @@
                                              <?php echo form_input($atts); ?>
                                             
                                        </div></td>
-										<td><div class="row-fluid"><label>Chasis No<span class="f_req">*</span></label>
+										<td><div class="row-fluid"><label>Battery Change Date<span class="f_req">*</span></label>
                                         <?php $atts = array(
-													  'name' => 'chasis_no',
-													  'id'   => 'chasis_no',
+													  'name' => 'battery_change_date',
+													  'id'   => 'battery_change_date',
 													  'size' => 50
 													   
 										   ); ?>
 						                    <?php echo form_input($atts); ?>
                                         </div></td>
-                                        <td><div class="row-fluid"><label>Vehicle Ownership<span class="f_req">*</span></label>
+                                        <td><div class="row-fluid"><label>Brakes Change Date<span class="f_req">*</span></label>
                                           <?php $atts = array(
-													  'name' => 'vehicle_ownership',
-													  'id'   => 'vehicle_ownership',
+													  'name' => 'brakes_change_date',
+													  'id'   => 'brakes_change_date',
 													  'size' => 50
 													   
 										   ); ?>
@@ -200,28 +200,28 @@
 
 									<tr style="border:none; background-color:#FFF;">
 										
-										<td><div class="row-fluid"><label>Vendor Id<span class="f_req"></span></label>
+										<td><div class="row-fluid"><label>Engine Oil Cost<span class="f_req"></span></label>
                                             <?php $atts = array(
-													  'name' => 'vendor_id',
-													  'id'   => 'vendor_id',
+													  'name' => 'engine_oil_cost',
+													  'id'   => 'engine_oil_cost',
 													  'size' => 50
 													   
 										   ); ?>
 						                    <?php echo form_input($atts); ?>
                                         </div></td>
-										<td><div class="row-fluid"><label>Lease Start Date<span class="f_req">*</span></label>
+										<td><div class="row-fluid"><label>Tyres Cost<span class="f_req">*</span></label>
                                         <?php $atts = array(
-													  'name' => 'lease_start_date',
-													  'id'   => 'lease_start_date',
+													  'name' => 'tyres_cost',
+													  'id'   => 'tyres_cost',
 													  'size' => 50
 													   
 										   ); ?>
 						                    <?php echo form_input($atts); ?>
                                         </div></td>
-                                 <td><div class="row-fluid"><label>Leaes End Date<span class="f_req">*</span></label>
+                                 <td><div class="row-fluid"><label>Gear Box Cost<span class="f_req">*</span></label>
                                            <?php $atts = array(
-													  'name' => 'lease_end_date',
-													  'id'   => 'lease_end_date',
+													  'name' => 'gear_box_cost',
+													  'id'   => 'gear_box_cost',
 													  'size' => 50
 													  
 													  
@@ -230,10 +230,10 @@
                                             
                                        </div></td></tr>
                                        <tr style="border:none; background-color:#FFF;">
-                                       <td><div class="row-fluid"><label>Cost<span class="f_req">*</span></label>
+                                       <td><div class="row-fluid"><label>Battery Cost<span class="f_req">*</span></label>
                                            <?php $atts = array(
-													  'name' => 'cost',
-													  'id'   => 'cost',
+													  'name' => 'battery_cost',
+													  'id'   => 'battery_cost',
 													  'size' => 50
 													  
 													  
@@ -241,10 +241,10 @@
                                              <?php echo form_input($atts); ?>
                                             
                                        </div></td>
-                                       <td><div class="row-fluid"><label>Weight Capacity<span class="f_req">*</span></label>
+                                       <td><div class="row-fluid"><label>Brakes Cost<span class="f_req">*</span></label>
                                            <?php $atts = array(
-													  'name' => 'weight_capacity',
-													  'id'   => 'weight_capacity',
+													  'name' => 'brakes_cost',
+													  'id'   => 'brakes_cost',
 													  'size' => 50
 													  
 													  
@@ -252,10 +252,10 @@
                                              <?php echo form_input($atts); ?>
                                             
                                        </div></td>
-                                       <td><div class="row-fluid"><label>Model No<span class="f_req">*</span></label>
+                                       <td><div class="row-fluid"><label>Servicing Date<span class="f_req">*</span></label>
                                            <?php $atts = array(
-													  'name' => 'model_no',
-													  'id'   => 'model_no',
+													  'name' => ' 	servicing_date',
+													  'id'   => ' 	servicing_date',
 													  'size' => 50
 													  
 													  
@@ -264,10 +264,10 @@
                                             
                                        </div></td></tr>
                                        <tr style="border:none; background-color:#FFF;">
-                                       <td><div class="row-fluid"><label>Make<span class="f_req">*</span></label>
+                                       <td><div class="row-fluid"><label>Servicing Cost<span class="f_req">*</span></label>
                                            <?php $atts = array(
-													  'name' => 'make',
-													  'id'   => 'make',
+													  'name' => 'servicing_cost',
+													  'id'   => 'servicing_cost',
 													  'size' => 50
 													  
 													  
@@ -276,7 +276,7 @@
                                             
                                        </div></td>
                                       
-                     <td><div class="row-fluid"><label>Description<span class="f_req"></span></label>
+                               <td><div class="row-fluid"><label>Description<span class="f_req"></span></label>
                                        <?php $atts = array(
 													
 													  'name' => 'description',
@@ -292,7 +292,7 @@
 									
                                     <tr>
 											<td rowspan="3">
-                                        <?php   echo form_submit('vehicle', 'Submit'); ?>
+                                        <?php   echo form_submit('insurance', 'Submit'); ?>
                                         <?php   echo form_reset('cancel', 'Cancel'); ?>
                                      	   </td>
 									</tr>
@@ -307,19 +307,17 @@
 									<tr>
 										
 										<th>S.No</th>
-										<th>Vehicle No</th>
-										<th>Vehicle Type</th>
-                                        <th>Make Year</th>
-                                        <th>Color</th>
-                                        <th>Chasis No</th>
-                                        <th>Vehicle Ownership</th>
-                                        <th>Vendor Id</th>
-                                        <th>Lease Start Date</th>
-                                        <th>Lease End Date</th>
-                                        <th>Cost</th>
-                                        <th>Weight Capacity</th>
-                                        <th>Model No</th>
-                                        <th>Make</th>
+										<th>Vehicle Id</th>
+                                        <th>Engine Oil Change Date</th>
+										<th>Tyres Change Date</th>
+                                        <th>Gear Box Change Date</th>
+                                        <th>Battery Change Date</th>
+                                        <th>Brakes Change Date</th>
+                                        <th>Engine Oil Cost</th>
+                                        <th>Tyres Cost</th>
+                                        <th>Gear Box Cost</th>
+                                        <th>Battery Cost</th>
+                                        <th>Brakes Cost</th>
 										<th>Description</th>																								
 										<th>Edit</th>
 									</tr>
@@ -332,24 +330,23 @@
 								 ?>
 									<tr>
 										<td><?php echo $sno; ?> </td>
-										<td><?php echo $row['vehicle_no']; ?></td>
-										<td><?php echo $row['vehicle_type']; ?></td>
-                                        <td><?php echo $row['make_year']; ?></td>
-                                        <td><?php echo $row['color']; ?></td>
-                                        <td><?php echo $row['chasis_no']; ?></td>
+										<td><?php echo $row['vehicle_id']; ?></td>
+										<td><?php echo $row['engine_oil_change_date']; ?></td>
+                                        <td><?php echo $row['tyres_change_date']; ?></td>
+                                        <td><?php echo $row['gear_box_change_date']; ?></td>
+                                        <td><?php echo $row['battery_change_date']; ?></td>
                                         
-										<td><?php echo $row['vehicle_ownership']; ?></td>
-                                        <td><?php echo $row['vendor_id']; ?></td>
-                                        <td><?php echo $row['lease_start_date']; ?></td>
-                                        <td><?php echo $row['lease_end_date']; ?></td>
-                                        <td><?php echo $row['cost']; ?></td>
-                                        <td><?php echo $row['weight_capacity']; ?></td>
-                                        <td><?php echo $row['model_no']; ?></td>
-                                        <td><?php echo $row['make']; ?></td>
+										<td><?php echo $row['brakes_change_date']; ?></td>
+                                        <td><?php echo $row['engine_oil_cost']; ?></td>
+                                        <td><?php echo $row['tyres_cost']; ?></td>
+                                        <td><?php echo $row['gear_box_cost']; ?></td>
+                                        <td><?php echo $row['battery_cost']; ?></td>
+                                        <td><?php echo $row['brakes_cost']; ?></td>
+                                        
 			                           <td><?php echo $row['description']; ?></td>	
                                     
 
-<td><a href="<?php echo base_url(); ?>/index.php?vehicle/editVehicle/<?php echo $row['id']; ?>" class="sepV_a" title="Edit"><i class="icon-pencil"></i></a>
+<td><a href="<?php echo base_url(); ?>/index.php?insurance/editinsurance/<?php echo $row['id']; ?>" class="sepV_a" title="Edit"><i class="icon-pencil"></i></a>
 				<a href="#" title="Delete"><i class="icon-trash"></i></a></td>
 									</tr>
 								<?php } ?>	

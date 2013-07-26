@@ -14,69 +14,57 @@ class Vehicle extends CI_Controller {
            $this->load->model('Vehicle_Model');
 		   $this->load->helper("url");
            $this->load->library("pagination");
+		   
         }
 
-		public function index(){
-						$data = array();
 			
-			//if($this->session->userdata('user_name')) {
+		public function viewForm(){
+		$this->load->library("pagination");
+		$this->load->model('Vehicle_Model');
 			$config = array();
-  			$config["base_url"] = base_url() . "/vehicle/vehicleEntry";
+  			$config["base_url"] = base_url() . "/vehicle/viewForm";
 			$config["total_rows"] = $this->Vehicle_Model->record_count();
-			$config["per_page"] = 3;
+			$config["per_page"] = 5;
 			$config["uri_segment"] = 3;
 			$this->pagination->initialize($config);
 			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-			$data["records"] = $this->Vehicle_Model->getAllVehicles($config["per_page"], $page);
-			
+			$data["records"] = $this->Vehicle_Model->getAll($config["per_page"], $page);
 			$data["links"] = $this->pagination->create_links();
-			$data['main_content'] ='frontend/vehicle';
-			$data['meta_title']  = 'Add Vehicle | VMS-1.0';
-			$this->load->view('frontend/vehicleEntry', $data);
-		}
-			
-		public function addVehicle(){
-			$data = array();
-			
-			//if($this->session->userdata('user_name')) {
-			$config = array();
-  			$config["base_url"] = base_url() . "/vehicle/vehicleEntry";
-			$config["total_rows"] = $this->Vehicle_Model->record_count();
-			$config["per_page"] = 3;
-			$config["uri_segment"] = 3;
-			$this->pagination->initialize($config);
-			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-			$data["records"] = $this->Vehicle_Model->getAllVehicles($config["per_page"], $page);
-			
-			$data["links"] = $this->pagination->create_links();
-			$data['main_content'] ='frontend/vehicle';
-			$data['meta_title']  = 'Add Vehicle | VMS-1.0';
-			$this->load->view('frontend/vehicleEntry', $data);
-			
 		
-			//}else {
-			//redirect('user/login');
-			//}
-			}
-			
-		public function saveVehicle()
-		{
 	
-			if($this->input->post('create') != ""){
-			$this->load->model('Vehicle_Model');
-			$last_id = $this->Vehicle_Model->add_vehicle();
-			$this->addVehicle();
-			}
+		
+                        $this->load->view('frontend/vehicleEntry', $data);
+	}	
+			
+		public function addVehicle()
+		{       //$this->load->model("Vendor_Model");
+			//$this->load->helper("url");
+			if($this->input->post('vehicle')){			
+				$this->Vehicle_Model->setVehicle();
+			redirect('vehicle/viewForm');
+}
 		}
+			public function getVehicle()
+		{
+			$this->load->model('Vehicle_Model');
+			$data['records'] = $this->Vehicle_Model->getAllVehicle();
+			$this->load->view('frontend/vehicleEntry', $data); // load the view with the $data variable
 			
-		public function edit_vehicle($id = 0){
-			
-			$this->load->model('vehicle_Model');
-			$data = array();
-			if($this->input->post('update')){
-				$data['records'] = $this->vehicle_Model->updateUserData();
 			}
-			$query = $this->vehicle_Model->getUser($id);
+	
+	
+	public function editVehicle($id = 0)
+		{
+			$this->load->database();
+			$this->load->model('Vehicle_Model');
+			$data = array();
+			if($this->input->post('update'))
+			{
+				$this->Vehicle_Model->updateVehicle();			
+		
+
+			}
+				$query = $this->Vehicle_Model->getVehicle($id);
 				
 			$data['fid']['value'] = $query['id'];
 			$data['fvehicle_no']['value'] = $query['vehicle_no'];
@@ -93,16 +81,15 @@ class Vehicle extends CI_Controller {
 			$data['fmodel_no']['value'] = $query['model_no'];
 			$data['fmake']['value'] = $query['make'];
 			$data['fdescription']['value'] = $query['description'];
+			$data['records'] = $this->Vehicle_Model->getAllVehicle();
 			
-			
-			
-			$data['records'] = $this->vehicle_Model->getAllUsers();
-			$data['main_content'] ='frontend/vehicleEdit';
-			$data['meta_title']  = 'Registration | VMS-1.0';
+			$data['meta_title']  = 'Vehicle | VMS-1.0';
 			
 			$this->load->view('frontend/vehicleEdit', $data);
-	}
-
-
+		}
+	
+	
 }
+?>
+
 	
