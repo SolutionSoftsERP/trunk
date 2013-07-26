@@ -1,111 +1,117 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Vehicle_Model extends CI_Model {
+class Vehicle_Model extends CI_Model
+{
 
 
-	/****************************************
-		## ADD NEW USER FROM REGISTRATION FORM
-	******************************************/
-
-	function setVehicle() 
-	{
-			$data = array(
-			'vehicle_no'	=>	$this->input->post('vehicle_no'),
-			'vehicle_type'	=>$this->input->post('vehicle_type'),
-			'make_year'		=>	$this->input->post('make_year'),	
-			'color'		=>	$this->input->post('color'),	
-			'chasis_no'	=>	$this->input->post('chasis_no'),
-			'vehicle_ownership'		=>	$this->input->post('vehicle_ownership'),	
-			'vendor_id'	=>	$this->input->post('vendor_id'),
-			'lease_start_date'	=>	$this->input->post('lease_start_date'),
-			'lease_end_date'	=>	$this->input->post('lease_end_date'),
-			'cost'	=>	$this->input->post('cost'),
-			'weight_capacity'	=>	$this->input->post('weight_capacity'),
-			'model_no'	=>	$this->input->post('model_no'),
-			'make'	=>	$this->input->post('make'),
-			'description'  => $this->input->post('description'),
-
-			'create_date' => date("Y/m/d"),);
-			if($this->input->post('vehicle')){
-			$query = $this->db->insert('vehicle_master',$data);
-			
-			
-			if($query){
-			$last_user_id = $this->db->insert_id();
-			return $last_user_id;
-			} else{
-			return false;
-			}
-		}
-	}
-
-	public function getAllVehicle()
-	{
-		$this->load->database();	
-		$query = $this->db->get('vehicle_master');
+			public function setVehicleIn() 
+			{
+				$data = array(
+				'vehicle_id'	=>$this->input->post('vehicle_id'),
+				'insurer'	   =>	$this->input->post('insurance'),
+				'Insurance_expiry_date'	   =>	$this->input->post('insurance_ex_date'),
+				'Insurance_cost'  =>	$this->input->post('insurance_cost'),	
+				'permit'	   =>	$this->input->post('permit'),
+				'permit_expiry_date'	   =>	$this->input->post('permit_ex_date'),
+				'permit_cost'  =>	$this->input->post('permit_cost'),	
+				'fitness'	   =>	$this->input->post('fitness'),
+				'fitness_expiry_date'	   =>	$this->input->post('fitness_ex_date'),
+				'fitness_cost'  =>	$this->input->post('fitness_cost'),	
+				'roadtax'	   =>	$this->input->post('roadtax'),
+				'roadtax_expiry_date'	   =>	$this->input->post('roadtax_ex_date'),
+				'roadtax_cost'  =>	$this->input->post('roadtax_cost'),	
+				'puc'	   =>	$this->input->post('puc'),
+				'puc_expiry_date'	   =>	$this->input->post('puc_ex_date'),
+				'puc_cost'  =>	$this->input->post('puc_cost'),	
+				'create_date'=> date('Y/m/d'),
+				);
 				
-		return $query->result_array();
-	}
-
-	
-		public function getAll($limit, $start){
+				$query = $this->db->insert('vehicle_insurance',$data);
 			
-			$this->db->limit($limit, $start);
-			$query = $this->db->get("vehicle_master");
+			
+				if($query){
+				$last_user_id = $this->db->insert_id();
+				return $last_user_id;
+				} else{
+				return false;
+				}
+			}
 
+		public function getAllVehicleIn($limit, $start){
+			$this->load->database();
+			$this->db->limit($limit, $start);
+			 $query = $this->db->get("vehicle_insurance");
 			if ($query->num_rows() > 0)
 			{ 
-					return $query->result_array();
+			
+				return	 $query->result_array();
+				
 			}
 			else {return NULL;}
 
 		    } 
 			public function record_count() {
 
-			return $this->db->count_all("vehicle_master");
+			return $this->db->count_all("vehicle_insurance");
 
 		    }
 
 		public function getVehicle($id)
-		{
-		$this->load->database();
-				$query = $this->db->query("select * from vehicle_master where id = $id");
+		{			
+				$this->load->database();
+				$query = $this->db->query("select * from vehicle_insurance where id = $id");
   
-        if ($query->num_rows() > 0)
-        { 
-			return $query->row_array();
+				 if ($query->num_rows() > 0)
+				{ 
+						return $query->row_array();
+				}
+				else {return NULL;}
+			     
+		} 
+
+   		public function updateVehicle(){
+
+				
+				$data = array(
+				'vehicle_id'	=>$this->input->post('vehicle_id'),
+				'insurer'	   =>	$this->input->post('insurance'),
+				'Insurance_expiry_date'	   =>	$this->input->post('insurance_ex_date'),
+				'Insurance_cost'  =>	$this->input->post('insurance_cost'),	
+				'permit'	   =>	$this->input->post('permit'),
+				'permit_expiry_date'	   =>	$this->input->post('permit_ex_date'),
+				'permit_cost'  =>	$this->input->post('permit_cost'),	
+				'fitness'	   =>	$this->input->post('fitness'),
+				'fitness_expiry_date'	   =>	$this->input->post('fitness_ex_date'),
+				'fitness_cost'  =>	$this->input->post('fitness_cost'),	
+				'roadtax'	   =>	$this->input->post('roadtax'),
+				'roadtax_expiry_date'	   =>	$this->input->post('roadtax_ex_date'),
+				'roadtax_cost'  =>	$this->input->post('roadtax_cost'),	
+				'puc'	   =>	$this->input->post('puc'),
+				'puc_expiry_date'	   =>	$this->input->post('puc_ex_date'),
+				'puc_cost'  =>	$this->input->post('puc_cost'),	
+				'create_date'=> date("Y/m/d"),
+				);
+				 
+				$this->db->where('id',$this->input->post('id'));
+				 $this->db->update('vehicle_insurance',$data); 		
+				
+					}
+	function getVehiclet($id) {
+
+      $query = $this->db->query("SELECT * FROM vehicle WHERE id = '{$id}'");
+	
+         
+        if ($query->num_rows > 0) {
+            return $query->result();
         }
-        else {return NULL;}
-     
-		}
-		public function updateVehicle()
-		{
-			$this->load->database();
-		$data = array(
-			'vehicle_no'	=>	$this->input->post('vehicle_no'),
-			'vehicle_type'		=>	$this->input->post('vehicle_type'),	
-			'make_year'		=>	$this->input->post('make_year'),	
-			'color' => $this->input->post('color'),
-			'chasis_no' => $this->input->post('chasis_no'),	
-			'vehicle_ownership' => $this->input->post('vehicle_ownership'),		
-			'vendor_id' => $this->input->post('vendor_id'),
-			'lease_start_date' => $this->input->post('lease_start_date'),
-			'lease_end_date' => $this->input->post('lease_end_date'),
-			'cost' => $this->input->post('cost'),
-			'weight_capacity' => $this->input->post('weight_capacity'),
-			'model_no' => $this->input->post('model_no'),
-			'make' => $this->input->post('make'),
-			'description' => $this->input->post('description'),
-			);
-		 
-		$this->db->where('id',$this->input->post('id'));
-		$this->db->update('vehicle_master',$data); 		
-		
-		}
+    }
+
+
+
+
 }
+
+
+
+
 ?>
-
-
-
-
-
