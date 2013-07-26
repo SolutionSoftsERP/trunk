@@ -1,49 +1,5 @@
 <?php include("includes/header.php"); ?>
- <script>
-            $(document).ready(function(){
-				$('#dob').Zebra_DatePicker({
-					// remember that the way you write down dates
-					// depends on the value of the "format" property!
-					direction: ['1995-01-01', false]
-				});
-				//* validation
-				$('#registration').validate({
-					onkeyup: false,
-					errorClass: 'error',
-					validClass: 'valid',
-					rules: {
-						user_name: { required: true, minlength: 3 },
-						password: { required: true, minlength: 3 },
-						cpassword:{ required: true, minlength: 3 },
-						email:{required: true, email: true},
-						first_name:{required: true,minlength: 2},
-						last_name:{required: true,minlength: 2},
-						mobile:{required: true, digits: true},
-						address:{required: true},
-						city:{required: true},
-						state:{required: true},
-						pincode:{required: true, digits: true},
-						gender:{required: true},
-						martial_status:{required: true},
-						dob:{required: true},
-						
-					},
-					highlight: function(element) {
-						$(element).closest('div').addClass("f_error");
-						setTimeout(function() {
-							boxHeight()
-						}, 200)
-					},
-					unhighlight: function(element) {
-						$(element).closest('div').removeClass("f_error");
-						setTimeout(function() {
-							boxHeight()
-						}, 200)
-					}
-				});
-            });
-        </script>
-       
+
             <!-- main content -->
             <div id="contentwrapper">
                 <div class="main_content">
@@ -212,15 +168,12 @@
                                              <?php echo form_dropdown('martial_status', $atts, 'select'); ?>
                                         </div></td>
                                         <td><div class="row-fluid"><label>Date of Birth<span class="f_req">*</span></label>
-                                        <?php /* $atts = array(
+                                        <?php $atts = array(
 													  'name' => 'dob',
 													  'id'   => 'dob',
 													  'size' => 35
 										   ); ?>
-                                             <?php echo form_input($atts); */ 
-											 ?>
-                                             <input type="text" name="dob" id="dob">
-                                             
+                                             <?php echo form_input($atts); ?>
                                         </div></td>
 									
 									</tr>
@@ -262,14 +215,13 @@
 										<td><?php echo $row['email']; ?></td>
                                         <td><?php echo $row['mobile']; ?></td>
 										<td><?php echo $row['phone']; ?></td>
-										<td><a href="<?php echo base_url(); ?>/user/edit_user/<?php echo $row['id']; ?>" class="sepV_a" title="Edit"><i class="icon-pencil"></i></a>
+										<td><a href="<?php echo base_url(); ?>/index.php?user/edit_user/<?php echo $row['id']; ?>" class="sepV_a" title="Edit"><i class="icon-pencil"></i></a>
 											<a href="#" title="Delete"><i class="icon-trash"></i></a></td>
 									</tr>
 								<?php } ?>	
 								</tbody>
 							</table>
-                        <p><?php echo $links; ?></p>
-
+                         <p><?php echo $links; ?></p>
                         </div>
                     </div>
                         

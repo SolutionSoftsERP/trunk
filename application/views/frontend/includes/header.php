@@ -36,7 +36,7 @@
 		</script>-->
 	 <script src="<?php echo base_url(); ?>/js/jquery.min.js"></script>
     <!-- smart resize event -->
-    <script src="<?php echo base_url(); ?>/js/jquery.debouncedresize.min.js"></script>
+   <!-- <script src="<?php echo base_url(); ?>/js/jquery.debouncedresize.min.js"></script>-->
     <!-- hidden elements width/height -->
     <script src="<?php echo base_url(); ?>/js/jquery.actual.min.js"></script>
     <!-- js cookie plugin -->
@@ -44,20 +44,20 @@
     <!-- main bootstrap js -->
     <script src="<?php echo base_url(); ?>/js/bootstrap.min.js"></script>
     <!-- tooltips -->
-    <script src="<?php echo base_url(); ?>/js/jquery.qtip.min.js"></script>
+   <!-- <script src="<?php echo base_url(); ?>/js/jquery.qtip.min.js"></script>-->
     <!-- jBreadcrumbs -->
     <script src="<?php echo base_url(); ?>/js/jquery.jBreadCrumb.1.1.min.js"></script>
     <!-- sticky messages -->
-    <script src="<?php echo base_url(); ?>/js/sticky.min.js"></script>
+  <!--  <script src="<?php echo base_url(); ?>/js/sticky.min.js"></script>-->
     <!-- fix for ios orientation change -->
     <script src="<?php echo base_url(); ?>/js/ios-orientationchange-fix.js"></script>
     <!-- scrollbar -->
-    <script src="<?php echo base_url(); ?>/js/antiscroll.js"></script>
-    <script src="<?php echo base_url(); ?>/js/jquery-mousewheel.js"></script>
+  <!--  <script src="<?php echo base_url(); ?>/js/antiscroll.js"></script>-->
+  <!--  <script src="<?php echo base_url(); ?>/js/jquery-mousewheel.js"></script>-->
     
     
      <!-- datepicker -->
-    <script src="<?php echo base_url(); ?>/js/bootstrap-datepicker.min.js"></script>
+   <!-- <script src="<?php echo base_url(); ?>/js/bootstrap-datepicker.min.js"></script>-->
    
     <!-- validation -->
     <script src="<?php echo base_url(); ?>/js/jquery.validate.min.js"></script>

@@ -53,7 +53,7 @@
 									</tr>
 									<tr>
 										<td><div class="row-fluid"><label>Mobile <span class="f_req">*</span></label>
-                                         <?php echo form_input('email',$fmobile['value']); ?>
+                                         <?php echo form_input('email',$femail['value']); ?>
                                         </div></td>
 										<td><div class="row-fluid"><label>Phone<span class="f_req"></span></label>
                                           <?php echo form_input('phone',$fphone['value']); ?>
@@ -84,7 +84,7 @@
                                          <?php $atts = array(
 										 			  'select' => 'Select',	
 													  'single' => 'Single',
-													  'married'=> 'Married'
+													  'married'   => 'Married'
 											   ); ?>
                                              <?php echo form_dropdown('martial_status', $atts, 'select'); ?>
                                         </div></td>
@@ -121,7 +121,6 @@
 								<tbody>
                                 <?php
 								$sno = 0;
-								if(isset($records)){
 								foreach($records as $row){
 									$sno = $sno + 1;
 								 ?>
@@ -132,13 +131,13 @@
 										<td><?php echo $row['email']; ?></td>
                                         <td><?php echo $row['mobile']; ?></td>
 										<td><?php echo $row['phone']; ?></td>
-										<td><a href="<?php echo base_url(); ?>/user/edit_user/<?php echo $row['id']; ?>" class="sepV_a" title="Edit"><i class="icon-pencil"></i></a>
+										<td><a href="<?php echo base_url(); ?>/index.php?user/edit_user/<?php echo $row['id']; ?>" class="sepV_a" title="Edit"><i class="icon-pencil"></i></a>
 											<a href="#" title="Delete"><i class="icon-trash"></i></a></td>
 									</tr>
-								<?php } } ?>	
+								<?php } ?>	
 								</tbody>
 							</table>
-                           <p><?php echo $links; ?></p>
+                        
                         </div>
                     </div>
                         

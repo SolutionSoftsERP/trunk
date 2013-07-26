@@ -8,14 +8,6 @@
 ****************************************************/
 
 class User extends CI_Controller {
-	
-		public function __construct() {
-        parent:: __construct();
-        $this->load->helper(array('form', 'url'));
-        $this->load->model("User_Model");
-        $this->load->library("pagination");
-		$this->load->library('session');
-    }
 
 		public function index(){
 				redirect('main');
@@ -61,29 +53,26 @@ class User extends CI_Controller {
 	// Registration function
 	// load Registration view
 	public function registration(){
-	if($this->session->userdata('user_name')) {
-			$config = array();
-  			$config["base_url"] = base_url() . "/user/registration";
-			$config["total_rows"] = $this->User_Model->record_count();
-			$config["per_page"] = 5;
-			$config["uri_segment"] = 3;
-			$this->pagination->initialize($config);
-			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-			$data["records"] = $this->User_Model->getAllUsers($config["per_page"], $page);
-			$data["links"] = $this->pagination->create_links();
-
+		
+		$this->load->model('User_Model');
+		$userdata = $this->User_Model->check_user(); //to check the user if already login it will redirect user to home page
+		if($userdata){
+			//redirect('user/profile');
+			 $data['error'] = 'User name already exists!';
+		}
+		else
+		{  
+			$data = array();
+			$data['records'] = $this->User_Model->getAllUsers();
 			$data['main_content'] ='frontend/registration';
 			$data['meta_title']  = 'Registration | VMS-1.0';
 			$this->load->view('frontend/registration', $data);
-		
-	}else {
-		redirect('user/login');
-	}
+		}
 	}
 	
 	public function edit_user($id = 0){
 			
-			if($this->session->userdata('user_name')) {
+			$this->load->model('User_Model');
 			$data = array();
 			if($this->input->post('update')){
 				$data['records'] = $this->User_Model->updateUserData();
@@ -107,23 +96,14 @@ class User extends CI_Controller {
 			$data['fpassword']['value'] = $query['password'];
 			
 			
-			$config = array();
-  			$config["base_url"] = base_url() . "/user/edit_user";
-			$config["total_rows"] = $this->User_Model->record_count();
-			$config["per_page"] = 5;
-			$config["uri_segment"] = 3;
-			$this->pagination->initialize($config);
-			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-			$data["records"] = $this->User_Model->getAllUsers($config["per_page"], $page);
-			$data["links"] = $this->pagination->create_links();
-			$data['main_content'] ='frontend/user_edit';
+			$data['records'] = $this->User_Model->getAllUsers();
+			$data['main_content'] ='frontend/registration';
 			$data['meta_title']  = 'Registration | VMS-1.0';
 			
 			$this->load->view('frontend/user_edit', $data);
-			}else{
-				redirect('user/login');
-			}
 	}
+	
+	
 	
 	function get_records(){
 			$this->load->model('User_Model');
@@ -133,11 +113,20 @@ class User extends CI_Controller {
 			
 	}
 
+	
+   
+
 	// Registration Vaidation function
 	// load Registration view if failed, load success message if true
 public function registrationvalidation(){
 	
-		if($this->input->post('registration') != ""){
+		$this->load->model('User_Model');
+		$userdata 	= $this->User_Model->check_user(); //to check the user if already login it will redirect user to home page
+		
+		if($userdata){
+			 $data['error'] = 'User name already exists!';
+			 $this->load->view('frontend/registration', $data);
+		}else{
 		$this->load->library('session');	
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
@@ -151,7 +140,13 @@ public function registrationvalidation(){
 		
 	}
 
-	//email verification
+
+
+
+
+
+
+//email verification
 	function emailverification() {
 			$this->load->library('session');	
 			$this->load->helper(array('form', 'url'));
@@ -200,16 +195,18 @@ public function registrationvalidation(){
 		redirect(base_url());
 
 	}
-	
-	//forget password
-	function forgetpassword(){
+//forget password
+function forgetpassword(){
+		$this->load->library('session');
+		$this->load->helper(array('form', 'url'));
+		$this->load->database();				
 		$data = array();
-		$data['main_content'] ='frontend/forgotPassword';
-		$data['meta_title']  = 'Forget password | VMS-1.0';
-		$this->load->view('frontend/forgotPassword', $data);
+		$data['main_content'] ='frontend/forgetpassword';
+		$data['meta_title']  = 'Forget password | Carlax';
+		$this->load->view('frontend/includes/template', $data);
 		if($_POST)
 		{
-		
+		$this->load->model('User_Model');
 		$query = $this->User_Model->forgetpassword();
 			if($query){
 			$this->session->set_flashdata('errormessage', 'Please verify your password in Email!');
@@ -219,12 +216,14 @@ public function registrationvalidation(){
 			redirect('user/forgetpassword');
 			}
 		}
-	}
+}
 
 	//reset password
 	function resetpassword()
 	{
+		
 		$this->load->view('profile/changepassword');	
+			
 	}
 //user profile
 function user_profile(){

@@ -1,34 +1,45 @@
 <?php
 class Distance_Controller extends CI_Controller
 {
-     public function __construct() {
+       
+	
+    	public function __construct() {
         parent:: __construct();
         $this->load->helper("url");
         $this->load->model("distance_model");
         $this->load->library("pagination");
-    }  
-	
-    
-	public function distance()
-	{	
-		if($this->session->userdata('user_name')) {
-		$data['records'] = $this->distance_model->get_distance();
-		$this->load->view('frontend/distanceMaster', $data); 
-		}else{
-		redirect('user/login');
+    }
+		
+		public function index(){
+			$this->distance();
 		}
+	public function distance()
+	{	//if($this->session->userdata('user_name')) {
+			$this->load->model('distance_model');
+			$config = array();
+  			$config["base_url"] = base_url() . "/distance_controller/distance";
+			$config["total_rows"] = $this->distance_model->record_count();
+			$config["per_page"] = 5;
+			$config["uri_segment"] = 3;
+			$this->pagination->initialize($config);
+			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+			$data["records"] = $this->distance_model->getAllDistance($config["per_page"], $page);
+			$data["links"] = $this->pagination->create_links();
+
+
+//			$data['records'] = $this->distance_model->get_distance();
+		 	$this->load->view('frontend/distanceMaster', $data); 
+		//	}
+		//	else {
+		//		redirect('user/login');
+		//		}
 	}
 
 	public function addDistance()
 	{
-		
-		//if($this->input->post('saveDistance')){
-		
-			$this->distance_model->setDistance();
-		//}
+		$this->load->model('distance_model');
+		$this->distance_model->setDistance();
 		$this->distance();
-		
-		
 	}
 
 	function get_records(){
@@ -57,10 +68,20 @@ class Distance_Controller extends CI_Controller
 			$data['fdistance']['value'] = $query['distance'];
 			$data['fdate']['value'] = $query['create_date'];
 			
-			$data['records'] = $this->distance_model->get_distance();
-			//$data['main_content'] ='frontend/distanceMaster';
-			$data['meta_title']  = 'Distance | VMS-1.0';
 			
+			$data['main_content'] ='frontend/distanceMaster';
+			$data['meta_title']  = 'Distance | VMS-1.0';
+			$this->load->model('distance_model');
+			$config = array();
+  			$config["base_url"] = base_url() . "/distance_controller/distance";
+			$config["total_rows"] = $this->distance_model->record_count();
+			$config["per_page"] = 5;
+			$config["uri_segment"] = 3;
+			$this->pagination->initialize($config);
+			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+			$data["records"] = $this->distance_model->getAllDistance($config["per_page"], $page);
+			$data["links"] = $this->pagination->create_links();
+		 	 
 			$this->load->view('frontend/distanceEdit', $data);
 	}
 	

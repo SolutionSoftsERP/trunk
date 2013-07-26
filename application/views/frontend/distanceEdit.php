@@ -1,4 +1,38 @@
 <?php include("includes/header.php"); ?>
+
+<script>
+            $(document).ready(function(){
+                
+    //* validation
+    $('#distance').validate({
+     onkeyup: false,
+     errorClass: 'error',
+     validClass: 'valid',
+     rules: {
+      from: { required: true, },
+      to: { required: true, },
+      distance:{ required: true,},
+      
+      
+     },
+     highlight: function(element) {
+      $(element).closest('div').addClass("f_error");
+      setTimeout(function() {
+       boxHeight()
+      }, 200)
+     },
+     unhighlight: function(element) {
+      $(element).closest('div').removeClass("f_error");
+      setTimeout(function() {
+       boxHeight()
+      }, 200)
+     },
+     errorPlacement: function(error, element) {
+      $(element).closest('div').append(error);
+     }
+    });
+            });
+        </script>
             <!-- main content -->
             <div id="contentwrapper">
                 <div class="main_content">

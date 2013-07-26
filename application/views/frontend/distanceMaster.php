@@ -1,13 +1,12 @@
 
 
 <?php include("includes/header.php"); ?>
-<script src="<?php echo base_url(); ?>js/jquery.min.js" type="text/javascript"/>
-<script src="<?php echo base_url(); ?>js/jquery.validate.js" type="text/javascript"/>
+
 <script>
             $(document).ready(function(){
                 
     //* validation
-    $('#destination').validate({
+    $('#distance').validate({
      onkeyup: false,
      errorClass: 'error',
      validClass: 'valid',
@@ -32,7 +31,11 @@
      },
      errorPlacement: function(error, element) {
       $(element).closest('div').append(error);
-     }
+     },
+     jQuery(function() {
+    jQuery.validator.addMethod("alpha_dash", function(value, element) {
+        return this.optional(element) || /^[a-z0-9_ \-]+$/i.test(value); 
+    }, "Alphanumerics, spaces, underscores & dashes only.");
     });
             });
         </script>
@@ -154,7 +157,7 @@
 								<?php } ?>	
 								</tbody>
 							</table>
-                        
+                         <p><?php echo $links; ?></p>
                         </div>
                     </div>
                         

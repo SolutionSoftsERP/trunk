@@ -26,10 +26,10 @@ class Distance_Model extends CI_Model {
 	{
 				$this->load->database();	
 				$query = $this->db->get('distance_master');
+				
 				return $query->result_array();
 	}
-
-	public function get_dist($id)
+public function get_dist($id)
 	{			
 				$this->load->database();
 				$query = $this->db->query("select * from distance_master where id = $id");
@@ -56,4 +56,23 @@ class Distance_Model extends CI_Model {
 		$this->db->update('distance_master',$data); 		
 		
 					}
+
+		public function getAllDistance($limit, $start){
+			
+			$this->db->limit($limit, $start);
+			$query = $this->db->get("distance_master");
+
+			if ($query->num_rows() > 0)
+			{ 
+					return $query->result_array();
+			}
+			else {return NULL;}
+
+		    } 
+			public function record_count() {
+
+			return $this->db->count_all("distance_master");
+
+		    }
+				
 }

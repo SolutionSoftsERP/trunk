@@ -19,14 +19,13 @@ class User_Model extends CI_Model {
 			'email'				=>	$this->input->post('email'),
 			'password'		=>	$this->input->post('password'),	
 			'martial_status'	=>	$this->input->post('martial_status'),
-			'dob' => $this->input->post('dob'),
 			'address'	=>	$this->input->post('address'),
 			'city'	=>	$this->input->post('city'),
 			'state'	=>	$this->input->post('state'),
 			'pincode'	=>	$this->input->post('pincode'),
 			'mobile'	=>	$this->input->post('mobile'),
 			'phone'	=>	$this->input->post('phone'),
-			'create_date' => date('Y-m-d'));
+			'create_date' => date("Y/m/d"),);
 			
 			if($this->input->post('gender')=='male')
 			{
@@ -54,7 +53,7 @@ class User_Model extends CI_Model {
 
 		$this->db->where('user_name', $this->input->post('user_name'));
 		$this->db->where('password', md5($this->input->post('password')));
-		$query = $this->db->get('users');
+		$query = $this->db->get('user_master');
 		if($query->num_rows == 1){
 			$query = $query->result();
 			$data = array(
@@ -96,18 +95,17 @@ class User_Model extends CI_Model {
 	function forgetpassword(){
 
 		$this->db->where('email', $this->input->post('email'));
-		$query = $this->db->get('users');
+		$query = $this->db->get('user_master');
 		if($query->num_rows==1){
 			$query = $query->result();
 
 			$data = array(
-					'user_id' 		=> $query[0]->id,
-					'email' 		=> $query[0]->email,
+					'user_id' 		=> $query[0]->user_id,
+					'email' 	=> $query[0]->email,
 					'user_name' 	=> $query[0]->user_name,
-					'password' 	=> $query[0]->password,
 				);
 			$password = $this->generateRandomPassword();
-			$this->send_forgetpassword_email($data['user_id'], $data['email'], $data['user_name'], $data['password']);
+			$this->send_forgetpassword_email($data['user_id'], $data['email'], $data['user_name'], $password);
 			return true;
 		}else{
 			return false;
@@ -120,18 +118,15 @@ class User_Model extends CI_Model {
 		$this->email->set_newline("\r\n");
 		$this->email->set_mailtype("text or html");
 
-		$this->email->from('magrawal@solutionsofts.com', 'Manoj Agrawal');
+		$this->email->from('no-reply@speedfundrussia.com', 'Carlax');
 		$this->email->to($email);
 
-		$this->email->subject('VMS-1.0 Forget password');
+		$this->email->subject('Carlax Forget password');
 		$user_id= random_string('alnum',16);
 		$this->email->message('Hello '.$username.',  Thank you for reset your account password. Please Login and update your password for more Security: Password:'.$password.'Thank you!');
-		//$this->email->send();
-		//echo $this->email->print_debugger();
 
 		if ($this->email->send()){
-				//return $this->saveUserPassword($userid,$password);
-				return true;
+				return $this->saveUserPassword($userid,$password);
 			
 		}else{
 			return false;
@@ -155,8 +150,8 @@ class User_Model extends CI_Model {
 		$data = array(
                'password'=> md5($password)
         );
-		$this->db->where('id', $user_id );
-		$this->db->update('users', $data); 
+		$this->db->where('user_id', $user_id );
+		$this->db->update('user_master', $data); 
 		if ($this->db->affected_rows() > 0) {
 			return true;
 		}
@@ -171,6 +166,7 @@ class User_Model extends CI_Model {
 			'first_name'		=>	$this->input->post('first_name'),	
 			'last_name'		=>	$this->input->post('last_name'),	
 			'email'				=>	$this->input->post('email'),
+			'password'		=>	$this->input->post('password'),	
 			'martial_status'	=>	$this->input->post('martial_status'),
 			'address'	=>	$this->input->post('address'),
 			'city'	=>	$this->input->post('city'),
@@ -313,11 +309,12 @@ function user_setting(){
 		return $query->result();
 		
 	}
-	function getAllUsers($limit, $start)
-    { 
-		$this->db->limit($limit, $start);
-        $query = $this->db->get("users");
-
+	function getAllUsers()
+    {  
+        $this->db->select('*');
+        $this->db->from('users');
+		$query = $this->db->get();
+		
         if ($query->num_rows() > 0)
         { 
 			return $query->result_array();
@@ -325,12 +322,6 @@ function user_setting(){
         else {return NULL;}
 
     } 
-	public function record_count() {
-
-        return $this->db->count_all("users");
-
-    }
-
 	
 	function getUser($id)
     {
